@@ -1,0 +1,8 @@
+---
+- name: install and enable apache
+  hosts: servers
+  become: yes
+
+  tasks:
+   - name: ping the host
+     ansible.builtin.ping:

@@ -1,0 +1,15 @@
+---
+- name: create multiple folder using ansible
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: multiple folder using ansible
+    file: path={{item}} state=directory mode=777
+    loop:
+    - /tmp/n1
+    - /tmp/n2
+    - /tmp/n3
+
+    # loop_control:
+    # loop_var: item

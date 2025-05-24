@@ -1,0 +1,8 @@
+---
+- name: create a dir with ansible
+  hosts: servers
+  become: yes
+
+  tasks:
+  - name: create a folder and give the 777 permission to that
+    file: path=/tmp/ansible state=directory mode=777

@@ -1,0 +1,21 @@
+---
+- name: install and enable apache
+  hosts: servers
+  become: yes
+
+  tasks:
+   - name: apache2 installation
+     apt:
+      name: apache2
+      state: present
+  
+   - name: enable the apache 
+     service:
+       name: apache2
+       enabled: yes
+   
+   - name: remove and purge the ansible
+     apt:
+       name: apache2
+       state: absent
+       purge: yes
