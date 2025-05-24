@@ -1,3 +1,5 @@
+inventory
+host
 # build products...
 *.py[co]
 build
