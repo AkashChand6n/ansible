@@ -1,0 +1,14 @@
+---
+- name: installing httpd
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: installing httpd on redhat
+    yum:
+      name: httpd
+      state: present
+  - name: starting the service
+    service:
+      name: httpd
+      state: started
