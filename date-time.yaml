@@ -1,0 +1,12 @@
+---
+- name: see the date and the time in ansible
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: see the date
+    debug:
+      var=ansible_date_time.date
+  - name: see the time
+    debug:
+      var=ansible_date_time.time
