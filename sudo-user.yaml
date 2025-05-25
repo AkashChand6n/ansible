@@ -1,0 +1,19 @@
+---
+- name: create and give the user sudo privilage
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: create group
+    group:
+      name: sudo 
+      state: present
+
+  - name: create user with sudo 
+    user:
+      name: akash
+      password: root
+      append: true
+      state: present
+      group: sudo
+      create_home: yes
