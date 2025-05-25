@@ -1,0 +1,6 @@
+---
+- name: Copy files to remote folder
+  hosts: all
+  become: yes
+  roles:
+  - file-copy

@@ -1,0 +1,23 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for file-copy
+    - name: Ensure destination directory exists
+      file:
+        path: "{{ dest_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Copy files to remote folder
+      copy:
+        src: files/sample.txt
+        dest: "{{ dest_dir }}/sample.txt"
+        mode: '0644'
+
+    - name: Copy multiple files (optional)
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ dest_dir }}/{{ item.dest }}"
+        mode: '0644'
+      loop:
+        - { src: 'files/file1.txt', dest: 'file1.txt' }
+        - { src: 'files/file2.txt', dest: 'file2.txt' }

@@ -1,0 +1,39 @@
+---
+- name: installing sql and giving the username ans the password
+  hosts: all
+  become: yes
+
+  vars:
+    username: root
+    password: root123
+    sql: mysql-server
+    py: python3-pymysql
+
+
+  tasks:
+  - name: updating the cache
+    apt:
+      update_cache: yes
+    tags: updating the cache
+
+  - name: installing mysql-server and py lib
+    apt: 
+      name: ["{{ sql }}","{{ py }}"]
+      state: present
+    tags: installing sql and py lib
+    notify: sql enable
+
+  - name: create a user in sql and give the permission
+    mysql_user:
+      name: "{{ username }}"
+      password: "{{ password }}"
+      host: "%"
+      priv: "*.*:ALL,GRANT"
+      state: present
+
+  handlers:
+  - name: sql enable
+    service: 
+      name: mysql
+      enabled: yes
+      state: started
