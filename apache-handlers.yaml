@@ -14,6 +14,8 @@
       update_cache: yes
       name: "{{ package }}"
       state: present
+    nofify:
+    - enable apache2
 
   - name: install httpd
     when: ansible_os_family in ["Redhat","RHEL"]
@@ -21,10 +23,8 @@
       update_cache: yes
       name: "{{ red }}"
       state: present
-  
-
     notify:
-    - enable apache2
+    - enable httpd
 
   handlers:
   - name: enable apache2
