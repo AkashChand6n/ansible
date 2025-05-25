@@ -1,0 +1,11 @@
+---
+- name: when condition
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: installing in ubuntu
+    when: ansible_os_family in "Debian"
+    apt:
+      name: neofetch
+      state: latest

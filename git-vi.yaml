@@ -1,0 +1,10 @@
+---
+- name: installing git and vi-editor
+  hosts: all
+  become: yes
+
+  tasks:
+  - name: installing both in a single tasks
+    apt:
+      name: git,vim
+      state: present

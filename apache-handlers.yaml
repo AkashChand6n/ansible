@@ -1,0 +1,38 @@
+---
+- name: using handlers
+  hosts: all
+  become: yes
+
+  vars:
+    package: apache2
+    red: httpd
+
+  tasks:
+  - name: install apache2
+    when: ansible_os_family in ["Debian","Ubuntu"]
+    apt:
+      update_cache: yes
+      name: "{{ package }}"
+      state: present
+
+  - name: install httpd
+    when: ansible_os_family in ["Redhat","RHEL"]
+    yum:
+      update_cache: yes
+      name: "{{ red }}"
+      state: present
+  
+
+    notify:
+    - enable apache2
+
+  handlers:
+  - name: enable apache2
+    service:
+      name: "{{ package }}"
+      enabled: yes
+
+  - name: enable httpd
+    service: 
+      name: "{{ red }}"
+      enabled: yes
